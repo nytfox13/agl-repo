@@ -1,13 +1,7 @@
-/* node 'ip-172-31-50-31.ec2.internal' {
+node 'ip-172-31-50-31.ec2.internal' {
   include memcached
- 
-  class centoslike {
-   notify { 'This is a centos 7 OS': }
-   }
-  class debianlike {
-    notify { ' This is debian': }
-  }
-
+  #include centoslike 
+  #include debianlike
 
 
   if $::operatingsystem == 'RedHat' {
@@ -21,14 +15,13 @@
     notify { "You said '${0}'. Looks like you are comparing '${1}' to  ${2}!": }
   }  
   
-*/
 
-  class centoslike {
-    notify { 'This is a centos 7 OS and it is scary': }
-   }
-  class debianlike {
-    notify { ' This is debian': }
-  }
+  #class centoslike {
+   # notify { 'This is a centos 7 OS': }
+   #}
+ # class debianlike {
+  #  notify { ' This is debian': }
+  #}
 
   case $::operatingsystem {
     'debain': {
@@ -38,13 +31,6 @@
         include centoslike
     }
    }
-#}
-
-
-
-
-
-
 
  #  notify { ' This is a 
   
@@ -58,7 +44,5 @@
   #file { '/tmp/test.conf':
   #  source => '/etc/puppet/test/test.conf',
  # }
-#}
-
-
+}
 
